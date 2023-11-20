@@ -12,11 +12,7 @@ public class TaskCategoryService {
     @Autowired
     private TaskCategoryRepository taskCategoryRepository;
 
-    public List<TaskCategory> getAllCategories(){
+    public List<TaskCategory> getAllCategories() {
         return taskCategoryRepository.findAll();
-    }
-
-    public TaskCategory getCategoryById(Long id){
-        return taskCategoryRepository.findById(id).orElse(null);
     }
 }

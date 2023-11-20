@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class TaskController {
@@ -20,9 +19,9 @@ public class TaskController {
     TaskService taskService;
 
     @GetMapping("/task/{taskId}")
-    public String getTask(@PathVariable Long taskId, Model model){
+    public String getTask(@PathVariable Long taskId, Model model) {
         var task = taskService.getTaskById(taskId);
-        if(task != null){
+        if (task != null) {
             List<Status> statuses = Arrays.asList(Status.values());
             model.addAttribute("task", task);
             model.addAttribute("statuses", statuses);
@@ -31,8 +30,8 @@ public class TaskController {
     }
 
     @PostMapping("/task/update")
-    public String updateTask(Task task){
+    public String updateTask(Task task) {
         taskService.updateTask(task);
-        return "redirect:/folder/details/"+task.getFolder().getId();
+        return "redirect:/folder/details/" + task.getFolder().getId();
     }
 }

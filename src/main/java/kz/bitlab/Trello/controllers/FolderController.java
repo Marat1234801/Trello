@@ -52,19 +52,19 @@ public class FolderController {
     }
 
     @PostMapping("/folder/addTask")
-    public String addTaskToFolder(Task task){
+    public String addTaskToFolder(Task task) {
         taskService.addTaskToFolder(task);
         return "redirect:/folder/details/" + task.getFolder().getId();
     }
 
     @PostMapping("/folder/{folderId}/deleteCategory")
-    public String deleteCategoryFromFolder(@PathVariable Long folderId, @RequestParam Long categoryId){
+    public String deleteCategoryFromFolder(@PathVariable Long folderId, @RequestParam Long categoryId) {
         folderService.removeCategoryFromFolder(folderId, categoryId);
         return "redirect:/folder/details/" + folderId;
     }
 
     @PostMapping("/folder/deleteTask/{taskId}")
-    public String deleteTaskFromFolder(@PathVariable Long taskId){
+    public String deleteTaskFromFolder(@PathVariable Long taskId) {
         var task = taskService.getTaskById(taskId);
         taskService.removeTaskFromFolder(task);
         return "redirect:/folder/details/" + task.getFolder().getId();

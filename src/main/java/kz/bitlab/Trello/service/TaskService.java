@@ -1,7 +1,6 @@
 package kz.bitlab.Trello.service;
 
 import kz.bitlab.Trello.enums.Status;
-import kz.bitlab.Trello.model.Folder;
 import kz.bitlab.Trello.model.Task;
 import kz.bitlab.Trello.repository.FolderRepository;
 import kz.bitlab.Trello.repository.TaskRepository;
@@ -16,39 +15,36 @@ public class TaskService {
     private TaskRepository taskRepository;
     @Autowired
     private FolderRepository folderRepository;
-    public List<Task> getAllTasks(){
-        return taskRepository.findAll();
-    }
 
-    public List<Task> getTasksByFolder(Long id){
+    public List<Task> getTasksByFolder(Long id) {
         var folder = folderRepository.findById(id).orElse(null);
-        if(folder != null){
+        if (folder != null) {
             return taskRepository.findAllByFolder(folder);
         }
         return null;
     }
 
-    public void addTaskToFolder(Task task){
-        if(task.getTitle().isEmpty() || task.getDescription().isEmpty()){
+    public void addTaskToFolder(Task task) {
+        if (task.getTitle().isEmpty() || task.getDescription().isEmpty()) {
             return;
         }
         task.setStatus(Status.TODO);
         taskRepository.save(task);
     }
 
-    public void  removeTaskFromFolder(Task task){
-        if(task == null){
+    public void removeTaskFromFolder(Task task) {
+        if (task == null) {
             return;
         }
         taskRepository.delete(task);
     }
 
-    public Task getTaskById(Long taskId){
+    public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId).orElse(null);
     }
 
-    public void updateTask(Task task){
-        if(task == null){
+    public void updateTask(Task task) {
+        if (task == null) {
             return;
         }
         taskRepository.save(task);
