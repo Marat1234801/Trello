@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout.html">
+<div layout:fragment="mainFragment" class="container mt-2">
+    <h1 th:text="${task.title}"></h1>
+    <form action="/task/update" method="post">
+        <input type="hidden" name="id" th:value="${task.id}">
+        <label>Task title</label>
+        <input type="text" name="title" th:value="${task.title}">
+        <label>Task description</label>
+        <input type="text" name="description" th:value="${task.description}">
+        <label>Task status</label>
+        <select name="status">
+            <option th:each="state : ${statuses}"
+                    th:value="${state.name()}"
+                    th:text="${state.getMessage()}"
+                    th:selected="${state == task.status}"></option>
+        </select>
+        <input type="hidden" name="folder.id" th:value="${task.folder.id}">
+        <button class="btn btn-warning">Update</button>
+    </form>
+</div>
+</html>

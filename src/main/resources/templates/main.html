@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout.html">
+<div layout:fragment="mainFragment" class="mt-4 container">
+    <button type="button" style="border: none!important; background-color: inherit!important; font-weight: bold;"
+            data-bs-toggle="modal" data-bs-target="#exampleModal">
+        + New Folder
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add new folder</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/folder/create" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Folder name</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success mt-2">ADD FOLDER</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4" th:each="folder : ${folders}">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" th:text="${folder.name}"></h5>
+            <a th:href="${'/folder/details/'+folder.id}" class="btn btn-primary">Details</a>
+        </div>
+    </div>
+</div>
+</html>
