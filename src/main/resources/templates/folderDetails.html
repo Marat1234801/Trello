@@ -99,7 +99,11 @@
             <td th:text="${task.id}"></td>
             <td th:text="${task.title}"></td>
             <td th:text="${task.description}"></td>
-            <td th:text="${task.status.getMessage().toUpperCase()}"></td>
+            <td style="" th:style="${task.status.name() == 'TODO' ? 'color: blue; font-weight: bold' :
+            (task.status.name() == 'IN_TEST' ? 'color: orange; font-weight: bold' :
+            (task.status.name() == 'DONE' ? 'color: green; font-weight: bold' :
+            'color: red; font-weight: bold')) }"
+                th:text="${task.status.getMessage().toUpperCase()}"></td>
             <td><a class="btn btn-primary" th:href="${'/task/'+task.id}">DETAILS</a></td>
             <td>
                 <form th:action="${'/folder/deleteTask/'+task.id}" method="post">
